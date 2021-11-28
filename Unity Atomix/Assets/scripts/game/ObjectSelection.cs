@@ -18,19 +18,24 @@ public class ObjectSelection : MonoBehaviour
 
     private void Cursor_DirectionSelected(object sender, DirectionSelectedEventArgs e)
     {
-        if (!cursor.noMove || _piece == null || !_directions.IsAvailable(e.Direction))
-            return;
+        if (IsNormalMovement(e.Direction))
+        {
+        }
+        else
+        {
+            _piece.GetComponent<Bounce>().StopIt();
+            _directions.TurnOff();
+            cursor.MoveAllowed();
+            var newPos = _directions.Get(e.Direction);
 
-        _piece.GetComponent<Bounce>().StopIt();
-        _directions.TurnOff();
-        cursor.MoveAllowed();
-        // TODO: MOVE PIECE!
-        var newPos = _directions.Get(e.Direction);
+            UndoRedoStack.Instance.Add(new MovePieceCommand(_piece, _piece.transform.position, newPos));
+            _piece = null;
+        }
+    }
 
-        UndoRedoStack.Instance.Add(new MovePieceCommand(_piece, _piece.transform.position, newPos));
-        //StartCoroutine(MovePiece(_piece, newPos));
-        
-        _piece = null;
+    private bool IsNormalMovement(Vector3 direction)
+    {
+        return !cursor.noMove || _piece == null || !_directions.IsAvailable(direction);
     }
 
     private void Update()
