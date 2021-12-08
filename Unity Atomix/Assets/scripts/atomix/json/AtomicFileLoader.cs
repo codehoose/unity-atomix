@@ -11,12 +11,14 @@ public class AtomicFileLoader : MonoBehaviour
 
     public GameObject square;
 
+    public GameObject atomPrefab;
+
     void Start()
     {
         squares = new List<GameObject>();
 
         var json = levelFile.text;
-        levelData = JsonUtility.FromJson<AtomixFile>(json);
+        levelData = JsonSerialization.Deserialize<AtomixFile>(json);
         DescribeLevel(0); // TODO: Make this any level
     }
 
@@ -42,6 +44,16 @@ public class AtomicFileLoader : MonoBehaviour
                     var go = Instantiate(square);
                     go.transform.position = new Vector3(x, 0, -y);
                     squares.Add(go);
+                } else if (row[x] != '.')
+                {
+                    string atom = row[x].ToString();
+                    string atomType = levelData.levels[levelIndex].atoms[atom][0];
+                    string connections = levelData.levels[levelIndex].atoms[atom][1];
+
+                    var go = Instantiate(atomPrefab);
+                    go.transform.position = new Vector3(x, 0, -y);
+                    go.GetComponent<Atom>().SetupShape(atom, atomType, connections);
+                    // TODO: ADD PIECES
                 }
             }
         }
