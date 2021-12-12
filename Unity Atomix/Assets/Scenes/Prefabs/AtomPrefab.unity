@@ -123,24 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &592668094 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2413714370566787007, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-  m_PrefabInstance: {fileID: 2413714370009819649}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &592668095
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 592668094}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1686707941
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,54 +306,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2413714368452556068, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714368551362129, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714368551362129, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714368699887601, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714368700114784, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714368700114784, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714369360831036, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714369360831038, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714369664727131, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714369664727131, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714369887011336, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714369887011336, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2413714370566787006, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -419,10 +353,6 @@ PrefabInstance:
     - target: {fileID: 2413714370566787007, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
       propertyPath: m_Name
       value: Atom
-      objectReference: {fileID: 0}
-    - target: {fileID: 2413714370566787007, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6d878fc082cab0439a156860d81eec1, type: 3}
