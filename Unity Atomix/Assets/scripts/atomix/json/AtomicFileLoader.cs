@@ -5,6 +5,8 @@ public class AtomicFileLoader : MonoBehaviour
 {
     private List<GameObject> squares;
 
+    private List<Atom> atoms;
+
     public TextAsset levelFile;
 
     public AtomixFile levelData;
@@ -13,13 +15,20 @@ public class AtomicFileLoader : MonoBehaviour
 
     public GameObject atomPrefab;
 
+    public DirectionsAllowed directionsAllowed;
+
+    public DirectionLines directionLines;
+
     void Start()
     {
         squares = new List<GameObject>();
+        atoms = new List<Atom>();
 
         var json = levelFile.text;
         levelData = JsonSerialization.Deserialize<AtomixFile>(json);
         DescribeLevel(0); // TODO: Make this any level
+
+        directionLines.Clicked += Direction_Clicked;
     }
 
     private void DescribeLevel(int levelIndex)
@@ -52,10 +61,27 @@ public class AtomicFileLoader : MonoBehaviour
 
                     var go = Instantiate(atomPrefab);
                     go.transform.position = new Vector3(x, 0, -y);
-                    go.GetComponent<Atom>().SetupShape(atom, atomType, connections);
-                    // TODO: ADD PIECES
+                    Atom a = go.GetComponent<Atom>();
+                    a.SetupShape(atom, atomType, connections);
+                    a.Clicked += Atom_Clicked;
+                    atoms.Add(a);
                 }
             }
         }
+    }
+
+    private void Atom_Clicked(object sender, string e)
+    {
+        // Cancel all other cursor direction lines
+        directionsAllowed.TurnOff();
+
+        var gameObject = sender as Atom;
+        directionsAllowed.TurnOn(gameObject.gameObject);
+    }
+
+
+    private void Direction_Clicked(object sender, Vector3 e)
+    {
+        print(e);
     }
 }

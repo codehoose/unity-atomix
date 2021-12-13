@@ -21,6 +21,13 @@ public class Atom : MonoBehaviour
     [Tooltip("This is the reference used to determine the 'win' condition")]
     public string indexRef;
 
+    public event EventHandler<string> Clicked;
+
+    private void OnMouseUpAsButton()
+    {
+        Clicked?.Invoke(this, indexRef);
+    }
+
     void Awake()
     {
         atoms = new Dictionary<string, Action>()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class DirectionLines : MonoBehaviour
 {
@@ -6,9 +7,19 @@ public class DirectionLines : MonoBehaviour
     public LineRenderer[] lines;
     public float yOffset = 0.26f;
 
+    public event EventHandler<Vector3> Clicked;
+
+    void Start()
+    {
+        foreach (var line in lines)
+        {
+            line.GetComponent<Trundle>().Clicked += Line_Clicked;
+        }
+    }
+
     public void Clear()
     {
-        foreach(var line in lines)
+        foreach (var line in lines)
         {
             line.gameObject.SetActive(false);
         }
@@ -29,7 +40,12 @@ public class DirectionLines : MonoBehaviour
         line.SetPosition(1, newEnd);
         line.gameObject.SetActive(true);
 
-        var size = (int)((start - end).magnitude);
-        line.GetComponent<Trundle>().SetSize(size);
+        var trundle = line.GetComponent<Trundle>();
+        trundle.AddColliderToLine(newStart, newEnd);
+    }
+
+    private void Line_Clicked(object sender, Vector3 direction)
+    {
+        Clicked?.Invoke(this, direction);
     }
 }

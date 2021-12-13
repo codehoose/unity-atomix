@@ -39,11 +39,11 @@ public class DirectionsAllowed : MonoBehaviour
     {
         RaycastHit hitInfo = new RaycastHit();
         int layerMask = 1 << LayerMask.NameToLayer(PlayPiece);
-        if (Physics.Raycast(piece.transform.position + direction, direction, out hitInfo, 5, layerMask))
+        if (Physics.Raycast(piece.transform.position, direction, out hitInfo, 5, layerMask))
         {
-            lines.AddLine(piece.transform.position + (direction * 0.5f),
-                          hitInfo.collider.gameObject.transform.position - (direction * 0.5f));
-            _directions.Add(direction, hitInfo.collider.gameObject.transform.position - direction);
+            lines.AddLine(piece.transform.position,
+                          hitInfo.collider.gameObject.transform.position - direction * 0.5f);
+            _directions.Add(direction, hitInfo.collider.gameObject.transform.position);
         }
     }
 }
