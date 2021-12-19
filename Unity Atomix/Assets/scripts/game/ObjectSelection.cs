@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
+[Obsolete]
 public class ObjectSelection : MonoBehaviour
 {
     private GameObject _piece;

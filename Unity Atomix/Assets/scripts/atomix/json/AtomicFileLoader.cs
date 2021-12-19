@@ -5,6 +5,12 @@ public class AtomicFileLoader : MonoBehaviour
 {
     private List<GameObject> squares;
 
+    private Atom selectedAtom;
+
+    private int level;
+
+    private GridTester gridTester;
+
     private List<Atom> atoms;
 
     public TextAsset levelFile;
@@ -19,6 +25,14 @@ public class AtomicFileLoader : MonoBehaviour
 
     public DirectionLines directionLines;
 
+    public string GridDebug
+    {
+        get
+        {
+            return gridTester?.CurrentState;
+        }
+    }
+
     void Start()
     {
         squares = new List<GameObject>();
@@ -26,7 +40,10 @@ public class AtomicFileLoader : MonoBehaviour
 
         var json = levelFile.text;
         levelData = JsonSerialization.Deserialize<AtomixFile>(json);
-        DescribeLevel(0); // TODO: Make this any level
+        DescribeLevel(level);
+
+        gridTester = new GridTester(levelData.levels[level].arena, 
+                                    levelData.levels[level].molecule);
 
         directionLines.Clicked += Direction_Clicked;
     }
@@ -72,6 +89,7 @@ public class AtomicFileLoader : MonoBehaviour
 
     private void Atom_Clicked(object sender, string e)
     {
+        selectedAtom = sender as Atom;
         // Cancel all other cursor direction lines
         directionsAllowed.TurnOff();
 
@@ -79,9 +97,25 @@ public class AtomicFileLoader : MonoBehaviour
         directionsAllowed.TurnOn(gameObject.gameObject);
     }
 
-
     private void Direction_Clicked(object sender, Vector3 e)
     {
-        print(e);
+        var direction = sender as DirectionLines;
+        direction.Clear();
+
+        var directionsAllowed = GetComponent<DirectionsAllowed>();
+        var newPos = directionsAllowed.Get(e);
+
+        gridTester.MovePiece(selectedAtom.indexRef, newPos);
+
+        var command = new MovePieceCommand(selectedAtom.gameObject,
+                                           selectedAtom.transform.position,
+                                           newPos);
+        UndoRedoStack.Instance.Add(command);
+        selectedAtom = null;
+
+        if (gridTester.IsSolution())
+        {
+            print("WINNER! WINNER! CHICKEN DINNER!");
+        }
     }
 }
