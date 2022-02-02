@@ -31,6 +31,10 @@ public class UndoRedoStack : MonoBehaviour
 
     private Stack<ICommand> _redo = new Stack<ICommand>();
 
+    public bool CanUndo => _executed.Count > 0;
+
+    public bool CanRedo => _redo.Count > 0;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.U))

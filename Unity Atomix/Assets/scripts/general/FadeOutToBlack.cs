@@ -15,6 +15,7 @@ public class FadeOutToBlack : MonoBehaviour
     private IEnumerator FadeOut(Action action, float start, float end, string snapshot = "")
     {
         var fadeOut = GetComponent<CanvasGroup>();
+        fadeOut.blocksRaycasts = true;
 
         AudioMixerSnapshot musicFade = null;
         if (!string.IsNullOrEmpty(snapshot))
